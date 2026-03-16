@@ -1,155 +1,639 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Bikelife: Netherlands Verification</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bikelife: Netherlands Verification</title>
+  <meta name="description" content="Official Discord ↔ Roblox verification service for Bikelife: Netherlands." />
+  <style>
+    :root{
+      --bg-1:#050816;
+      --bg-2:#0b1220;
+      --bg-3:#0f172a;
+      --card:rgba(17,24,39,.72);
+      --card-strong:rgba(15,23,42,.92);
+      --border:rgba(255,255,255,.09);
+      --text:#e5e7eb;
+      --muted:#9ca3af;
+      --blue:#60a5fa;
+      --blue-2:#3b82f6;
+      --green:#22c55e;
+      --discord:#5865F2;
+      --shadow:0 20px 70px rgba(0,0,0,.45);
+      --radius:24px;
+      --max:1180px;
+    }
 
-<style>
+    *{
+      box-sizing:border-box;
+    }
 
-body{
-font-family:Arial;
-background:#0f172a;
-color:white;
-margin:0;
-}
+    html{
+      scroll-behavior:smooth;
+    }
 
-.header{
-text-align:center;
-padding:60px 20px;
-background:#020617;
-}
+    body{
+      margin:0;
+      font-family:Inter,Segoe UI,Arial,sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(circle at 10% 10%, rgba(96,165,250,.16), transparent 25%),
+        radial-gradient(circle at 90% 15%, rgba(88,101,242,.14), transparent 22%),
+        radial-gradient(circle at 50% 100%, rgba(34,197,94,.10), transparent 30%),
+        linear-gradient(180deg, var(--bg-1) 0%, var(--bg-2) 42%, var(--bg-3) 100%);
+      min-height:100vh;
+      overflow-x:hidden;
+    }
 
-.logo{
-width:200px;
-border-radius:10px;
-}
+    a{
+      color:inherit;
+      text-decoration:none;
+    }
 
-h1{
-color:#38bdf8;
-font-size:40px;
-}
+    img{
+      display:block;
+      max-width:100%;
+    }
 
-.container{
-max-width:900px;
-margin:auto;
-padding:40px;
-}
+    .container{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+    }
 
-.card{
-background:#1e293b;
-padding:30px;
-border-radius:10px;
-margin-bottom:20px;
-}
+    .nav{
+      position:sticky;
+      top:0;
+      z-index:50;
+      background:rgba(5,8,22,.72);
+      backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,.06);
+    }
 
-.button{
-display:inline-block;
-background:#5865F2;
-color:white;
-padding:12px 20px;
-border-radius:6px;
-text-decoration:none;
-font-weight:bold;
-}
+    .nav-inner{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      padding:14px 0;
+    }
 
-.button:hover{
-background:#4752C4;
-}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      font-weight:800;
+      letter-spacing:.2px;
+    }
 
-.footer{
-text-align:center;
-padding:30px;
-color:#94a3b8;
-}
+    .brand img{
+      width:48px;
+      height:48px;
+      object-fit:cover;
+      border-radius:14px;
+      border:1px solid rgba(255,255,255,.12);
+      box-shadow:0 10px 30px rgba(0,0,0,.35);
+    }
 
-</style>
+    .nav-links{
+      display:flex;
+      align-items:center;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .nav-links a{
+      color:var(--muted);
+      padding:11px 15px;
+      border-radius:999px;
+      transition:.2s ease;
+      font-weight:600;
+    }
+
+    .nav-links a:hover{
+      color:var(--text);
+      background:rgba(255,255,255,.06);
+    }
+
+    .nav-cta{
+      background:rgba(88,101,242,.14);
+      border:1px solid rgba(88,101,242,.28);
+      color:#dbe4ff !important;
+    }
+
+    .nav-cta:hover{
+      background:rgba(88,101,242,.22) !important;
+    }
+
+    .hero{
+      position:relative;
+      padding:86px 0 42px;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.02), transparent 30%),
+        radial-gradient(circle at center, rgba(96,165,250,.08), transparent 45%);
+    }
+
+    .hero-grid{
+      display:grid;
+      grid-template-columns:1.15fr .85fr;
+      gap:30px;
+      align-items:center;
+      position:relative;
+      z-index:1;
+    }
+
+    .eyebrow{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:9px 15px;
+      border-radius:999px;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.24);
+      color:#bfdbfe;
+      font-size:14px;
+      font-weight:700;
+      margin-bottom:20px;
+    }
+
+    h1{
+      margin:0 0 18px;
+      font-size:clamp(2.6rem, 5vw, 5rem);
+      line-height:.98;
+      letter-spacing:-.05em;
+    }
+
+    .hero p{
+      margin:0 0 28px;
+      color:var(--muted);
+      line-height:1.8;
+      font-size:1.08rem;
+      max-width:720px;
+    }
+
+    .hero-actions{
+      display:flex;
+      flex-wrap:wrap;
+      gap:14px;
+      margin-bottom:24px;
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      gap:10px;
+      padding:15px 20px;
+      border-radius:16px;
+      font-weight:800;
+      transition:.2s ease;
+      border:1px solid transparent;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+    }
+
+    .btn-primary{
+      background:linear-gradient(135deg, var(--discord), #4752c4);
+      color:#fff;
+      box-shadow:0 14px 32px rgba(88,101,242,.34);
+    }
+
+    .btn-secondary{
+      background:rgba(255,255,255,.04);
+      color:var(--text);
+      border-color:rgba(255,255,255,.09);
+    }
+
+    .hero-meta{
+      display:flex;
+      flex-wrap:wrap;
+      gap:12px;
+    }
+
+    .pill{
+      padding:10px 14px;
+      border-radius:999px;
+      background:rgba(255,255,255,.04);
+      border:1px solid rgba(255,255,255,.08);
+      color:var(--muted);
+      font-size:.95rem;
+      font-weight:600;
+    }
+
+    .hero-card{
+      position:relative;
+      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:30px;
+      padding:18px;
+      box-shadow:var(--shadow);
+      overflow:hidden;
+    }
+
+    .hero-card::before{
+      content:"";
+      position:absolute;
+      inset:auto -15% -22% auto;
+      width:260px;
+      height:260px;
+      background:radial-gradient(circle, rgba(96,165,250,.20), transparent 65%);
+      pointer-events:none;
+    }
+
+    .hero-card::after{
+      content:"";
+      position:absolute;
+      inset:-18% auto auto -12%;
+      width:200px;
+      height:200px;
+      background:radial-gradient(circle, rgba(88,101,242,.18), transparent 60%);
+      pointer-events:none;
+    }
+
+    .hero-image-wrap{
+      position:relative;
+      border-radius:22px;
+      overflow:hidden;
+      border:1px solid rgba(255,255,255,.08);
+      background:#0b1220;
+    }
+
+    .hero-image-wrap img{
+      width:100%;
+      aspect-ratio:1/1;
+      object-fit:cover;
+    }
+
+    .floating-badge{
+      position:absolute;
+      left:16px;
+      right:16px;
+      bottom:16px;
+      background:rgba(8,15,29,.84);
+      border:1px solid rgba(255,255,255,.08);
+      backdrop-filter:blur(10px);
+      border-radius:18px;
+      padding:14px 16px;
+      box-shadow:0 12px 30px rgba(0,0,0,.35);
+    }
+
+    .floating-badge strong{
+      display:block;
+      margin-bottom:5px;
+      font-size:1rem;
+    }
+
+    .floating-badge span{
+      color:var(--muted);
+      font-size:.94rem;
+      line-height:1.6;
+    }
+
+    .section{
+      padding:28px 0 42px;
+    }
+
+    .section-title{
+      margin:0 0 10px;
+      font-size:clamp(1.7rem, 2.6vw, 2.5rem);
+      letter-spacing:-.03em;
+    }
+
+    .section-subtitle{
+      color:var(--muted);
+      line-height:1.8;
+      max-width:840px;
+      margin:0 0 26px;
+    }
+
+    .stats{
+      display:grid;
+      grid-template-columns:repeat(3,1fr);
+      gap:18px;
+    }
+
+    .card{
+      background:var(--card);
+      border:1px solid var(--border);
+      border-radius:var(--radius);
+      padding:24px;
+      box-shadow:var(--shadow);
+    }
+
+    .card h3{
+      margin:0 0 10px;
+      font-size:1.08rem;
+    }
+
+    .card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .steps{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:18px;
+    }
+
+    .step-number{
+      width:42px;
+      height:42px;
+      border-radius:14px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-weight:800;
+      margin-bottom:14px;
+      color:#dbeafe;
+      background:linear-gradient(135deg, rgba(96,165,250,.25), rgba(59,130,246,.18));
+      border:1px solid rgba(96,165,250,.24);
+    }
+
+    .legal{
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:20px;
+    }
+
+    .legal-card{
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:26px;
+      padding:28px;
+      box-shadow:var(--shadow);
+      transition:.2s ease;
+    }
+
+    .legal-card:hover{
+      transform:translateY(-2px);
+      border-color:rgba(96,165,250,.22);
+    }
+
+    .tag{
+      display:inline-block;
+      margin-bottom:14px;
+      padding:7px 10px;
+      border-radius:999px;
+      font-size:.82rem;
+      font-weight:700;
+      color:#bfdbfe;
+      background:rgba(96,165,250,.10);
+      border:1px solid rgba(96,165,250,.20);
+    }
+
+    .legal-card h3{
+      margin:0 0 10px;
+      font-size:1.18rem;
+    }
+
+    .legal-card p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+    }
+
+    .bottom-cta{
+      margin-top:8px;
+      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+      border:1px solid var(--border);
+      border-radius:28px;
+      padding:34px;
+      box-shadow:var(--shadow);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .bottom-cta h2{
+      margin:0 0 8px;
+      font-size:clamp(1.6rem, 2.4vw, 2.3rem);
+      letter-spacing:-.03em;
+    }
+
+    .bottom-cta p{
+      margin:0;
+      color:var(--muted);
+      line-height:1.75;
+      max-width:720px;
+    }
+
+    .footer{
+      padding:30px 0 48px;
+      color:var(--muted);
+    }
+
+    .footer-box{
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      gap:16px;
+      flex-wrap:wrap;
+      border-top:1px solid rgba(255,255,255,.08);
+      padding-top:20px;
+    }
+
+    @media (max-width: 980px){
+      .hero-grid,
+      .stats,
+      .steps,
+      .legal{
+        grid-template-columns:1fr;
+      }
+    }
+
+    @media (max-width: 700px){
+      .nav-inner{
+        flex-direction:column;
+        align-items:flex-start;
+      }
+
+      .hero{
+        padding-top:54px;
+      }
+
+      .hero-actions .btn{
+        width:100%;
+      }
+
+      .bottom-cta{
+        padding:24px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="header">
+  <nav class="nav">
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">
+        <img src="logo.png" alt="Bikelife: Netherlands logo">
+        <span>Bikelife: Netherlands</span>
+      </a>
 
-<img src="logo.png" class="logo">
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="terms.html">Terms of Service</a>
+        <a class="nav-cta" href="https://discord.gg/shab" target="_blank" rel="noopener noreferrer">Join Discord</a>
+      </div>
+    </div>
+  </nav>
 
-<h1>Bikelife: Netherlands</h1>
+  <header class="hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="eyebrow">Official Discord ↔ Roblox Verification</div>
 
-<p>Official Discord ↔ Roblox Verification</p>
+        <h1>Verify faster. Join cleaner. Ride with the real community.</h1>
 
-<br>
+        <p>
+          The official verification bot for <strong>Bikelife: Netherlands</strong> securely links Discord accounts
+          with Roblox accounts for access control, identity confirmation, and community verification.
+          This service is used exclusively for verification purposes within the Bikelife: Netherlands community.
+        </p>
 
-<a class="button" href="https://discord.gg/shab">Join our Discord</a>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://discord.gg/shab" target="_blank" rel="noopener noreferrer">Join our Discord</a>
+          <a class="btn btn-secondary" href="#how-to-verify">How verification works</a>
+        </div>
 
-</div>
+        <div class="hero-meta">
+          <div class="pill">Owned by Bikelife: Netherlands</div>
+          <div class="pill">Verification only</div>
+          <div class="pill">Use <strong>/verify</strong> in Discord</div>
+        </div>
+      </div>
 
+      <div class="hero-card">
+        <div class="hero-image-wrap">
+          <img src="logo.png" alt="Bikelife: Netherlands verification logo">
+          <div class="floating-badge">
+            <strong>Community verification system</strong>
+            <span>Join the Discord, run <strong>/verify</strong>, and follow the steps provided by the bot to complete your Roblox verification.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-<div class="container">
+  <main>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Why this verification system exists</h2>
+        <p class="section-subtitle">
+          The bot keeps the Bikelife: Netherlands community organized by ensuring users complete Roblox-to-Discord verification
+          before receiving access tied to their community identity.
+        </p>
 
-<div class="card">
+        <div class="stats">
+          <div class="card">
+            <h3>Verification only</h3>
+            <p>This bot is built specifically to verify Roblox accounts with Discord accounts and is not intended for unrelated automation or unrelated data collection.</p>
+          </div>
 
-<h2>Verification</h2>
+          <div class="card">
+            <h3>Community owned</h3>
+            <p>The service is owned and operated by Bikelife: Netherlands and is used for its Discord community and verification workflows.</p>
+          </div>
 
-<p>
-This bot is owned and operated by <b>Bikelife: Netherlands</b>.
-</p>
+          <div class="card">
+            <h3>Clear process</h3>
+            <p>The verification flow is simple: join the server, run <strong>/verify</strong>, and follow the instructions until your Roblox account is confirmed.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>
-The bot is used exclusively for verifying Roblox accounts with Discord accounts
-inside the Bikelife: Netherlands community.
-</p>
+    <section class="section" id="how-to-verify">
+      <div class="container">
+        <h2 class="section-title">How to verify</h2>
+        <p class="section-subtitle">
+          Follow the steps below to complete your verification inside the official Bikelife: Netherlands Discord server.
+        </p>
 
-</div>
+        <div class="steps">
+          <div class="card">
+            <div class="step-number">1</div>
+            <h3>Join the Discord</h3>
+            <p>Enter the official community server through the invite link and head to the appropriate verification area.</p>
+          </div>
 
+          <div class="card">
+            <div class="step-number">2</div>
+            <h3>Run /verify</h3>
+            <p>Use the <strong>/verify</strong> command in Discord to start the official Roblox verification process.</p>
+          </div>
 
-<div class="card">
+          <div class="card">
+            <div class="step-number">3</div>
+            <h3>Follow the steps</h3>
+            <p>The bot will guide you through the required Roblox linking or confirmation steps. Follow them exactly as shown.</p>
+          </div>
 
-<h2>How to Verify</h2>
+          <div class="card">
+            <div class="step-number">4</div>
+            <h3>Get verified</h3>
+            <p>Once completed successfully, your Discord account will be linked to your Roblox account for community verification.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-<p>To verify your account:</p>
+    <section class="section">
+      <div class="container">
+        <h2 class="section-title">Legal information</h2>
+        <p class="section-subtitle">
+          Review the official legal documents for the verification bot below.
+        </p>
 
-<ol>
-<li>Join the Discord server</li>
-<li>Use the command <b>/verify</b></li>
-<li>Follow the instructions provided by the bot</li>
-<li>Complete the Roblox verification steps</li>
-</ol>
+        <div class="legal">
+          <a class="legal-card" href="privacy.html">
+            <div class="tag">Privacy</div>
+            <h3>Privacy Policy</h3>
+            <p>Read how limited verification-related information may be processed, retained, protected, and removed upon request where applicable.</p>
+          </a>
 
-<p>
-Once finished, your Discord account will be linked to your Roblox account.
-</p>
+          <a class="legal-card" href="terms.html">
+            <div class="tag">Terms</div>
+            <h3>Terms of Service</h3>
+            <p>Read the rules for using the verification bot, service availability terms, acceptable use requirements, and liability limitations.</p>
+          </a>
+        </div>
+      </div>
+    </section>
 
-</div>
+    <section class="section">
+      <div class="container">
+        <div class="bottom-cta">
+          <div>
+            <h2>Ready to verify?</h2>
+            <p>Join the official Bikelife: Netherlands Discord and use <strong>/verify</strong> to begin the process.</p>
+          </div>
 
+          <a class="btn btn-primary" href="https://discord.gg/shab" target="_blank" rel="noopener noreferrer">Open Discord Invite</a>
+        </div>
+      </div>
+    </section>
+  </main>
 
-<div class="card">
-
-<h2>Legal</h2>
-
-<p>
-This verification bot operates according to the following policies:
-</p>
-
-<p>
-
-<a class="button" href="privacy.html">Privacy Policy</a>
-
-&nbsp;
-
-<a class="button" href="terms.html">Terms of Service</a>
-
-</p>
-
-</div>
-
-</div>
-
-
-<div class="footer">
-
-<p>© 2026 Bikelife: Netherlands</p>
-
-<p>Official verification service</p>
-
-</div>
+  <footer class="footer">
+    <div class="container footer-box">
+      <div>© 2026 Bikelife: Netherlands. Official verification service.</div>
+      <div>Discord ↔ Roblox Verification</div>
+    </div>
+  </footer>
 
 </body>
-
 </html>
