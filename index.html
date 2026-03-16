@@ -1,396 +1,155 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Bikelife: Netherlands Verification</title>
-  <meta name="description" content="Official verification portal and legal information for the Bikelife: Netherlands Discord verification bot." />
-  <style>
-    :root{
-      --bg:#0b1220;
-      --bg-soft:#111a2b;
-      --card:#111827cc;
-      --card-border:rgba(255,255,255,.08);
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --accent:#60a5fa;
-      --accent-2:#22c55e;
-      --shadow:0 20px 60px rgba(0,0,0,.45);
-      --radius:22px;
-      --max:1180px;
-    }
+<title>Bikelife: Netherlands Verification</title>
 
-    *{box-sizing:border-box}
-    html{scroll-behavior:smooth}
-    body{
-      margin:0;
-      font-family:Inter,Segoe UI,Arial,sans-serif;
-      color:var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(96,165,250,.16), transparent 30%),
-        radial-gradient(circle at top right, rgba(34,197,94,.14), transparent 25%),
-        linear-gradient(180deg,#08101d 0%, #0b1220 45%, #0d1526 100%);
-      min-height:100vh;
-    }
+<style>
 
-    a{color:inherit;text-decoration:none}
-    img{max-width:100%;display:block}
+body{
+font-family:Arial;
+background:#0f172a;
+color:white;
+margin:0;
+}
 
-    .container{
-      width:min(var(--max), calc(100% - 32px));
-      margin:0 auto;
-    }
+.header{
+text-align:center;
+padding:60px 20px;
+background:#020617;
+}
 
-    .nav{
-      position:sticky;
-      top:0;
-      z-index:20;
-      backdrop-filter:blur(14px);
-      background:rgba(8,16,29,.72);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
+.logo{
+width:200px;
+border-radius:10px;
+}
 
-    .nav-inner{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:20px;
-      padding:14px 0;
-    }
+h1{
+color:#38bdf8;
+font-size:40px;
+}
 
-    .brand{
-      display:flex;
-      align-items:center;
-      gap:14px;
-      font-weight:800;
-      letter-spacing:.2px;
-    }
+.container{
+max-width:900px;
+margin:auto;
+padding:40px;
+}
 
-    .brand img{
-      width:46px;
-      height:46px;
-      object-fit:cover;
-      border-radius:14px;
-      box-shadow:var(--shadow);
-      border:1px solid rgba(255,255,255,.1);
-    }
+.card{
+background:#1e293b;
+padding:30px;
+border-radius:10px;
+margin-bottom:20px;
+}
 
-    .nav-links{
-      display:flex;
-      gap:12px;
-      flex-wrap:wrap;
-    }
+.button{
+display:inline-block;
+background:#5865F2;
+color:white;
+padding:12px 20px;
+border-radius:6px;
+text-decoration:none;
+font-weight:bold;
+}
 
-    .nav-links a{
-      color:var(--muted);
-      padding:10px 14px;
-      border-radius:999px;
-      transition:.2s ease;
-    }
+.button:hover{
+background:#4752C4;
+}
 
-    .nav-links a:hover{
-      color:var(--text);
-      background:rgba(255,255,255,.06);
-    }
+.footer{
+text-align:center;
+padding:30px;
+color:#94a3b8;
+}
 
-    .hero{
-      padding:72px 0 38px;
-    }
-
-    .hero-grid{
-      display:grid;
-      grid-template-columns:1.2fr .8fr;
-      gap:28px;
-      align-items:center;
-    }
-
-    .eyebrow{
-      display:inline-flex;
-      align-items:center;
-      gap:10px;
-      padding:8px 14px;
-      border:1px solid rgba(96,165,250,.22);
-      background:rgba(96,165,250,.08);
-      border-radius:999px;
-      color:#bfdbfe;
-      font-size:14px;
-      margin-bottom:18px;
-    }
-
-    h1{
-      font-size:clamp(2.4rem, 5vw, 4.5rem);
-      line-height:1.02;
-      margin:0 0 18px;
-      letter-spacing:-.04em;
-    }
-
-    .hero p{
-      color:var(--muted);
-      font-size:1.08rem;
-      line-height:1.75;
-      max-width:720px;
-      margin:0 0 28px;
-    }
-
-    .cta-row{
-      display:flex;
-      flex-wrap:wrap;
-      gap:14px;
-    }
-
-    .btn{
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      padding:14px 18px;
-      border-radius:14px;
-      font-weight:700;
-      transition:.2s ease;
-      border:1px solid transparent;
-    }
-
-    .btn-primary{
-      background:linear-gradient(135deg, var(--accent), #3b82f6);
-      color:white;
-      box-shadow:0 12px 35px rgba(59,130,246,.3);
-    }
-
-    .btn-primary:hover{transform:translateY(-1px)}
-
-    .btn-secondary{
-      background:rgba(255,255,255,.04);
-      border-color:rgba(255,255,255,.08);
-      color:var(--text);
-    }
-
-    .btn-secondary:hover{
-      background:rgba(255,255,255,.07);
-    }
-
-    .hero-card{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid var(--card-border);
-      border-radius:30px;
-      overflow:hidden;
-      box-shadow:var(--shadow);
-      position:relative;
-    }
-
-    .hero-card::after{
-      content:"";
-      position:absolute;
-      inset:auto -20% -35% auto;
-      width:220px;
-      height:220px;
-      background:radial-gradient(circle, rgba(96,165,250,.22), transparent 65%);
-      pointer-events:none;
-    }
-
-    .hero-card img{
-      width:100%;
-      aspect-ratio:1/1;
-      object-fit:cover;
-    }
-
-    .section{
-      padding:26px 0 40px;
-    }
-
-    .section-title{
-      font-size:clamp(1.6rem, 2.7vw, 2.4rem);
-      margin:0 0 12px;
-      letter-spacing:-.03em;
-    }
-
-    .section-subtitle{
-      color:var(--muted);
-      line-height:1.7;
-      max-width:850px;
-      margin:0 0 26px;
-    }
-
-    .grid{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
-    }
-
-    .card{
-      background:var(--card);
-      border:1px solid var(--card-border);
-      border-radius:var(--radius);
-      padding:24px;
-      box-shadow:var(--shadow);
-    }
-
-    .card h3{
-      margin:0 0 10px;
-      font-size:1.1rem;
-    }
-
-    .card p{
-      margin:0;
-      color:var(--muted);
-      line-height:1.7;
-    }
-
-    .legal{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:20px;
-    }
-
-    .legal a.card{
-      display:block;
-      transition:.2s ease;
-    }
-
-    .legal a.card:hover{
-      transform:translateY(-2px);
-      border-color:rgba(96,165,250,.25);
-    }
-
-    .badge{
-      display:inline-block;
-      font-size:.82rem;
-      color:#bfdbfe;
-      background:rgba(96,165,250,.09);
-      border:1px solid rgba(96,165,250,.18);
-      padding:7px 10px;
-      border-radius:999px;
-      margin-bottom:14px;
-    }
-
-    .footer{
-      padding:26px 0 50px;
-      color:var(--muted);
-      font-size:.95rem;
-    }
-
-    .footer-box{
-      display:flex;
-      justify-content:space-between;
-      gap:18px;
-      align-items:center;
-      flex-wrap:wrap;
-      padding-top:18px;
-      border-top:1px solid rgba(255,255,255,.08);
-    }
-
-    @media (max-width: 950px){
-      .hero-grid,
-      .grid,
-      .legal{
-        grid-template-columns:1fr;
-      }
-    }
-
-    @media (max-width: 640px){
-      .nav-inner{
-        align-items:flex-start;
-        flex-direction:column;
-      }
-      .hero{
-        padding-top:48px;
-      }
-      .btn{
-        width:100%;
-      }
-    }
-  </style>
+</style>
 </head>
+
 <body>
-  <nav class="nav">
-    <div class="container nav-inner">
-      <a class="brand" href="index.html">
-        <img src="logo.png" alt="Bikelife: Netherlands logo">
-        <span>Bikelife: Netherlands</span>
-      </a>
-      <div class="nav-links">
-        <a href="index.html">Home</a>
-        <a href="privacy.html">Privacy Policy</a>
-        <a href="terms.html">Terms of Service</a>
-      </div>
-    </div>
-  </nav>
 
-  <header class="hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="eyebrow">Official Discord ↔ Roblox Verification</div>
-        <h1>Secure verification for the Bikelife: Netherlands community.</h1>
-        <p>
-          This bot is owned and operated by <strong>Bikelife: Netherlands</strong> and is used exclusively
-          to verify Roblox accounts with Discord accounts for community access and identity confirmation.
-          It is not intended for unrelated data collection, advertising, or unrelated automation.
-        </p>
-        <div class="cta-row">
-          <a class="btn btn-primary" href="privacy.html">View Privacy Policy</a>
-          <a class="btn btn-secondary" href="terms.html">View Terms of Service</a>
-        </div>
-      </div>
+<div class="header">
 
-      <div class="hero-card">
-        <img src="logo.png" alt="Bikelife: Netherlands verification bot logo">
-      </div>
-    </div>
-  </header>
+<img src="logo.png" class="logo">
 
-  <main>
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">What this bot does</h2>
-        <p class="section-subtitle">
-          The verification bot exists for one clear purpose: linking a member’s Discord account to their Roblox account
-          for access control and verification inside the Bikelife: Netherlands ecosystem.
-        </p>
+<h1>Bikelife: Netherlands</h1>
 
-        <div class="grid">
-          <div class="card">
-            <h3>Verification Only</h3>
-            <p>The bot is designed specifically for identity verification between Discord and Roblox within the community.</p>
-          </div>
-          <div class="card">
-            <h3>Minimal Data Use</h3>
-            <p>Only the information needed for verification and technical operation is processed and retained where necessary.</p>
-          </div>
-          <div class="card">
-            <h3>Community Ownership</h3>
-            <p>This service is owned and used by Bikelife: Netherlands and is intended for its members and related moderation workflows.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+<p>Official Discord ↔ Roblox Verification</p>
 
-    <section class="section">
-      <div class="container">
-        <h2 class="section-title">Legal Information</h2>
-        <p class="section-subtitle">
-          Review the official legal documents for the verification bot below.
-        </p>
+<br>
 
-        <div class="legal">
-          <a class="card" href="privacy.html">
-            <div class="badge">Privacy</div>
-            <h3>Privacy Policy</h3>
-            <p>Details about what information may be processed, why it is used, how long it may be kept, and how removal requests can be made.</p>
-          </a>
+<a class="button" href="https://discord.gg/shab">Join our Discord</a>
 
-          <a class="card" href="terms.html">
-            <div class="badge">Terms</div>
-            <h3>Terms of Service</h3>
-            <p>Rules for using the verification bot, limitations of liability, service availability, and acceptable use requirements.</p>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
+</div>
 
-  <footer class="footer">
-    <div class="container footer-box">
-      <div>© 2026 Bikelife: Netherlands. All rights reserved.</div>
-      <div>Official Verification Service</div>
-    </div>
-  </footer>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Verification</h2>
+
+<p>
+This bot is owned and operated by <b>Bikelife: Netherlands</b>.
+</p>
+
+<p>
+The bot is used exclusively for verifying Roblox accounts with Discord accounts
+inside the Bikelife: Netherlands community.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>How to Verify</h2>
+
+<p>To verify your account:</p>
+
+<ol>
+<li>Join the Discord server</li>
+<li>Use the command <b>/verify</b></li>
+<li>Follow the instructions provided by the bot</li>
+<li>Complete the Roblox verification steps</li>
+</ol>
+
+<p>
+Once finished, your Discord account will be linked to your Roblox account.
+</p>
+
+</div>
+
+
+<div class="card">
+
+<h2>Legal</h2>
+
+<p>
+This verification bot operates according to the following policies:
+</p>
+
+<p>
+
+<a class="button" href="privacy.html">Privacy Policy</a>
+
+&nbsp;
+
+<a class="button" href="terms.html">Terms of Service</a>
+
+</p>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+
+<p>© 2026 Bikelife: Netherlands</p>
+
+<p>Official verification service</p>
+
+</div>
+
 </body>
+
 </html>
